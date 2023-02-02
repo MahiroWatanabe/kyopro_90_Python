@@ -8,22 +8,9 @@ from bisect import bisect, bisect_left, bisect_right
 from functools import reduce
 from decimal import Decimal, getcontext
 
-N,K = map(int, input().split())
-a = list(map(int,input().split()))
+def lcm(A,B):
+    return (A*B)//gcd(A,B)
 
-cnt = defaultdict(int)
-ans = 0
-l = 0
-
-for r in range(N):
-    cnt[a[r]] += 1
-    while True:
-        if len(cnt) <= K:
-            break
-        cnt[a[l]] -= 1
-        if cnt[a[l]] == 0:
-            del cnt[a[l]]
-        l += 1
-    ans = max(ans,r-l+1)
-
-print(ans)
+A,B = map(int, input().split())
+ans = lcm(A,B)
+print(ans if ans <= 10**18 else "Large")
