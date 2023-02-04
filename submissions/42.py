@@ -1,17 +1,15 @@
 K = int(input())
-cnt = 0
-MOD = 10**9+7
+if K%9 != 0:
+    print(0)
+    exit()
 
-for i in range(9,10**5+1,9):
-    index = 0
-    S = str(i)
-    flag = False
-    for j in range(len(S)):
-        if S[j] == "0":
-            flag = True
-            break
-        index += int(S[j])
-    if K == index and not flag:
-        cnt = (cnt+1)%MOD
-        
-print(cnt)
+MOD = (10**9)+7
+dp = [0]*(K+1)
+dp[0] = 1
+for s in range(1,K+1):
+    for d in range(1,10):
+        if s-d >= 0:
+            dp[s] += dp[s-d]
+    dp[s] %= MOD
+    
+print(dp[K])
