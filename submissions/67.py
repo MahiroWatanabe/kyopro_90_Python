@@ -1,23 +1,26 @@
-def oct_num(i):
-    s = ""
-    while i > 0:
-        s = str(i % 10) + s
-        i //= 10
+def to9(num,v):
+    res = ""
+    while True:
+        if num == 1:
+            res = "1" + res
+            break
+        elif num == 0:
+            break
+        res = str(num%v) + res
+        num //= v
+        
+    return res if res != "" else "0"
 
-    return s
+def f(num):
+    num = int(num,8)
+    num = to9(num,9)
+    num = num.replace("8","5")
+    return num
 
+N,K = map(int, input().split())
+N = str(N)
 
-def kyu_num(i):
-    s = ""
-    while i > 0:
-        s = str(i % 9) + s
-        i //= 9
+for i in range(K):
+    N = f(N)
 
-    return s
-
-
-N, K = map(int, input().split())
-
-for _ in range(K):
-    new_oct_num = oct_num(N)
-    print(new_oct_num)
+print(N)
